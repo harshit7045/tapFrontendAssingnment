@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { apiFetch } from '../utils/apiFetch';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
@@ -21,7 +22,7 @@ export function useAuth() {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`${API_BASE}/auth/login`, {
+      const res = await apiFetch(`${API_BASE}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, password })
@@ -44,7 +45,7 @@ export function useAuth() {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`${API_BASE}/auth/register`, {
+      const res = await apiFetch(`${API_BASE}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, password, contacts })

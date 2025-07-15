@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { haversine } from '../utils/haversine';
 import { useAuth } from './useAuth';
+import { apiFetch } from '../utils/apiFetch';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 const ALERT_INTERVAL = 20000; // 20 seconds
@@ -53,7 +54,7 @@ export function useAlertTrigger(dangerZones) {
         console.log('[ALERT] Triggered: Preparing to send alert for lat:', position.lat, 'lng:', position.lng);
         const send = () => {
           console.log('[ALERT] Sending alert (background or immediate) for lat:', position.lat, 'lng:', position.lng);
-          fetch(`${API_BASE}/alert-location/location`, {
+          apiFetch(`${API_BASE}/alert-location/location`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

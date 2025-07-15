@@ -4,6 +4,7 @@ import { useNetworkStatus } from '../hooks/useNetworkStatus';
 import { haversine } from '../utils/haversine';
 import { useAuth } from '../hooks/useAuth';
 import { useAlertTrigger } from '../hooks/useAlertTrigger';
+import { apiFetch } from '../utils/apiFetch';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
@@ -22,7 +23,7 @@ export default function DangerZoneMapPage() {
       setLoading(true);
       setFetchError('');
       try {
-        const res = await fetch(`${API_BASE}/danger-zones`, {
+        const res = await apiFetch(`${API_BASE}/danger-zones`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();

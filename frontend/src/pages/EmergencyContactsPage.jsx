@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { apiFetch } from '../utils/apiFetch';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
@@ -16,7 +17,7 @@ export default function EmergencyContactsPage() {
       setLoading(true);
       setError('');
       try {
-        const res = await fetch(`${API_BASE}/contacts`, {
+        const res = await apiFetch(`${API_BASE}/contacts`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -38,7 +39,7 @@ export default function EmergencyContactsPage() {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`${API_BASE}/contacts`, {
+      const res = await apiFetch(`${API_BASE}/contacts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +63,7 @@ export default function EmergencyContactsPage() {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`${API_BASE}/contacts`, {
+      const res = await apiFetch(`${API_BASE}/contacts`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
